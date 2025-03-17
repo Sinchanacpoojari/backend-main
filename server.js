@@ -16,7 +16,7 @@ app.get('/',(req, res)=>{
 //Registration page api
 
 app.post('/register',async(req, res)=>{
-    const {username,email,password}=req.body
+    const {username,gmail,password}=req.body
     try{
         const hashedPassword= await bcrypt.hash(password,10)
         const user=new User({username,email,password:hashedPassword})
@@ -33,7 +33,7 @@ app.post('/register',async(req, res)=>{
 //Login page api
 
 app.post('/login',async(req,res)=>{
-    const {email,password}=req.body
+    const {gmail,password}=req.body
     try{
         const user = await User.findOne({ email });
         if (!user || !(await bcrypt.compare(password, user.password))) 
